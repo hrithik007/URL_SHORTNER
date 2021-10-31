@@ -32,8 +32,7 @@ app.post('/shorturl',async (req,res)=>{
   let shortUrl = new shorturl({full:req.body.fullurl})
   console.log("Saving!!")
    await shortUrl.save()
-    
-   .then(()=>{ console.log("Inserted!!"); res.send(shortUrl.short)}).catch(error => console.log("ERROR"));
+   .then(()=>{ console.log("Inserted!!"); res.send(shortUrl.short)}).catch(error => console.log(error));
   
 })
 app.get('/:shortUrl',async (req,res)=>{
@@ -42,7 +41,6 @@ app.get('/:shortUrl',async (req,res)=>{
    
       if(shortUrl == null) return res.sendStatus(404);
       res.redirect(shortUrl.full);
- 
   }
   catch{(error)=> console.log(error)};
 })
